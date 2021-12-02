@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "id": "dummmmmmy",
-  "version": "${version}",
+  "version": "1.17-1.5.0",
 
   "name": "MmmMmmMmmMmm",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "don't hurt me pls :S",
   "authors": [
-    "MehVahdJukaar"
+    "MehVahdJukaar, bonusboni, luigipunch"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm",
+    "sources": "https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/dummmmmmy/logo.png",
+  "icon": "assets/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -22,7 +22,7 @@
       "net.mehvahdjukaar.dummmmmmy.DummmmmmyMod"
     ],
     "client": [
-      "net.mehvahdjukaar.dummmmmmy.setup.ClientSetup"
+      "net.mehvahdjukaar.dummmmmmy.setup.ClientHandler"
     ]
   },
   "mixins": [
@@ -32,7 +32,7 @@
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": "1.16.x"
+    "minecraft": "1.17.x"
   },
   "suggests": {
     "another-mod": "*"

@@ -25,9 +25,6 @@ public class TargetDummyItem extends Item {
 		super(builder);
 	}
 
-
-
-
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		Direction direction = context.getClickedFace();
@@ -42,7 +39,7 @@ public class TargetDummyItem extends Item {
 				double d0 = blockpos.getX();
 				double d1 = blockpos.getY();
 				double d2 = blockpos.getZ();
-				List<Entity> list = world.getEntities((Entity) null,
+				List<Entity> list = world.getEntities(null,
 						new AABB(d0, d1, d2, d0 + 1.0D, d1 + 2.0D, d2 + 1.0D));
 				if (!list.isEmpty()) {
 					return InteractionResult.FAIL;

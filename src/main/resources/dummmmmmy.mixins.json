@@ -4,6 +4,8 @@
   "package": "net.mehvahdjukaar.dummmmmmy.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "SwordItemMixin",
+    "ToolItemMixin"
   ],
   "client": [
   ],

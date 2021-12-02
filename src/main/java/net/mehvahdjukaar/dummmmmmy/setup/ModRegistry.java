@@ -16,7 +16,8 @@ public class ModRegistry {
 
 
     public static void init() {
-        Registry.register(Registry.ITEM, new ResourceLocation(DummmmmmyMod.MOD_ID, "dummy_placer"), DUMMY_ITEM);
+
+        Registry.register(Registry.ITEM, new ResourceLocation(DummmmmmyMod.MOD_ID, "target_dummy_placer"), DUMMY_ITEM);
 
         Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(DummmmmmyMod.MOD_ID, TARGET_DUMMY_NAME), TARGET_DUMMY);
         Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(DummmmmmyMod.MOD_ID, DUMMY_NUMBER_NAME), DUMMY_NUMBER);
@@ -32,6 +33,7 @@ public class ModRegistry {
     public static final String DUMMY_NUMBER_NAME = "dummy_number";
     public static final EntityType<DummyNumberEntity> DUMMY_NUMBER = EntityType.Builder.<DummyNumberEntity>of(
             DummyNumberEntity::new, MobCategory.MISC)
+                    .clientTrackingRange(16)
                     .sized(0.6f, 1.8f)
             .build(DUMMY_NUMBER_NAME);
 
