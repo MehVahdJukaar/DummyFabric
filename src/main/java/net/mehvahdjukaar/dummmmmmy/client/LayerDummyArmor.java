@@ -6,19 +6,20 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.world.entity.EquipmentSlot;
 
-public class LayerDummyArmor<T extends TargetDummyEntity, M extends HumanoidModel<T>, A extends TargetDummyModel<T>> extends HumanoidArmorLayer<T, M, A> {
+public class LayerDummyArmor<T extends TargetDummyEntity, A extends HumanoidModel<T>> extends HumanoidArmorLayer<T, A, A> {
 
-    public LayerDummyArmor(RenderLayerParent<T, M> renderer, A modelLegs, A modelChest) {
+    public LayerDummyArmor(RenderLayerParent<T, A> renderer, A modelLegs, A modelChest) {
         super(renderer, modelLegs, modelChest);
+        if (modelChest instanceof TargetDummyModel m) m.standPlate.visible = false;
+        if (modelLegs instanceof TargetDummyModel m2) m2.standPlate.visible = false;
     }
-
 
     @Override
     public void setPartVisibility(A modelIn, EquipmentSlot slotIn) {
         modelIn.setAllVisible(false);
         //boolean flag = modelIn instanceof  TargetDummyModel;
         modelIn.rightLeg.visible = false;
-        modelIn.standPlate.visible = false;
+
         switch (slotIn) {
             case HEAD -> modelIn.head.visible = true;
             case CHEST -> {
