@@ -5,7 +5,6 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.mehvahdjukaar.dummmmmmy.DummmmmmyMod;
 import net.mehvahdjukaar.dummmmmmy.setup.ModRegistry;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,6 +16,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -172,8 +172,7 @@ public class DummyNumberEntity extends Entity {
         super.setNoGravity(true);
     }
 
-
-    public boolean canPlayerSee(LocalPlayer player) {
+    public boolean canPlayerSee(Player player) {
         return player == null || this.targetPlayers.contains(player.getUUID());
     }
 }
