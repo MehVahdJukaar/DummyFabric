@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.mehvahdjukaar.dummmmmmy.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "SwordItemMixin",
+    "ToolItemMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

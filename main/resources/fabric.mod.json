@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "dummmmmmy",
+  "version": "1.18-1.5.0",
+
+  "name": "MmmMmmMmmMmm",
+  "description": "don't hurt me pls :S",
+  "authors": [
+    "MehVahdJukaar, bonusboni, luigipunch"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm",
+    "sources": "https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.mehvahdjukaar.dummmmmmy.DummmmmmyMod"
+    ],
+    "client": [
+      "net.mehvahdjukaar.dummmmmmy.setup.ClientHandler"
+    ]
+  },
+  "mixins": [
+    "dummmmmmy.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.18.x"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
