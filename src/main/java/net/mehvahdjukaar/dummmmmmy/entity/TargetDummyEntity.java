@@ -59,7 +59,7 @@ public class TargetDummyEntity extends Mob {
     public MobAttribute mobType = MobAttribute.UNDEFINED;
     //position of damage number in the semicircle
     private int damageNumberPos = 0;
-    //needed cause it's private and we arent calling le tick
+    //needed because it's private and we aren't calling le tick
     private final NonNullList<ItemStack> lastArmorItems = NonNullList.withSize(4, ItemStack.EMPTY);
 
     private final Map<ServerPlayer, Integer> currentlyAttacking = new HashMap<>();
@@ -97,7 +97,6 @@ public class TargetDummyEntity extends Mob {
         tag.putInt("Type", this.mobType.ordinal());
         tag.putInt("NumberPos", this.damageNumberPos);
         tag.putBoolean("Sheared", this.isSheared());
-
         //this.applyEquipmentModifiers();
     }
 

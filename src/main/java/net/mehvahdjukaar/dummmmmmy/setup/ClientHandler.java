@@ -5,7 +5,9 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.network.PacketContext;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fabricmc.fabric.impl.networking.ClientSidePacketRegistryImpl;
 import net.mehvahdjukaar.dummmmmmy.DummmmmmyMod;
 import net.mehvahdjukaar.dummmmmmy.client.NumberRenderer;
 import net.mehvahdjukaar.dummmmmmy.client.TargetDummyModel;
@@ -50,33 +52,34 @@ public class ClientHandler implements ClientModInitializer {
     public static ModelLayerLocation DUMMY_ARMOR_INNER = loc("dummy_armor_inner");
 
 
-    @SuppressWarnings("deprecation")
     public static void registerClientReceivers() {
         ClientPlayNetworking.registerGlobalReceiver(NetworkHandler.DAMAGE_PACKET_ID, ClientHandler::packetDamageHandler);
         ClientPlayNetworking.registerGlobalReceiver(NetworkHandler.EQUIP_PACKET_ID, ClientHandler::packetSyncEquipHandler);
-        ClientSidePacketRegistry.INSTANCE.register(DummyNumberEntity.SPAWN_NUMBER_PACKET_ID, (context, packet) -> {
-            double x = packet.readDouble();
-            double y = packet.readDouble();
-            double z = packet.readDouble();
+        ClientPlayNetworking.registerReceiver(DummyNumberEntity.SPAWN_NUMBER_PACKET_ID, ClientHandler::packetSpawnDummy);
+    }
 
-            int entityId = packet.readInt();
-            float number = packet.readFloat();
-            int color = packet.readInt();
-            int type = packet.readInt();
+    private static void packetSpawnDummy(Minecraft client, ClientPacketListener clientPacketListener, FriendlyByteBuf packet, PacketSender packetSender) {
+        double x = packet.readDouble();
+        double y = packet.readDouble();
+        double z = packet.readDouble();
 
-            int size = packet.readInt();
-            Set<UUID> set = new HashSet<>();
-            for (int j = 0; j < size; j++) {
-                set.add(packet.readUUID());
-            }
+        int entityId = packet.readInt();
+        float number = packet.readFloat();
+        int color = packet.readInt();
+        int type = packet.readInt();
 
-            context.getTaskQueue().execute(() -> {
-                DummyNumberEntity numberEntity = new DummyNumberEntity(number, color, type, Minecraft.getInstance().level, set);
-                numberEntity.setId(entityId);
-                numberEntity.setPos(x, y, z);
-                numberEntity.setAnimation(type);
-                Minecraft.getInstance().level.putNonPlayerEntity(entityId, numberEntity);
-            });
+        int size = packet.readInt();
+        Set<UUID> set = new HashSet<>();
+        for (int j = 0; j < size; j++) {
+            set.add(packet.readUUID());
+        }
+
+        client.execute(() -> {
+            DummyNumberEntity numberEntity = new DummyNumberEntity(number, color, type, Minecraft.getInstance().level, set);
+            numberEntity.setId(entityId);
+            numberEntity.setPos(x, y, z);
+            numberEntity.setAnimation(type);
+            Minecraft.getInstance().level.putNonPlayerEntity(entityId, numberEntity);
         });
     }
 

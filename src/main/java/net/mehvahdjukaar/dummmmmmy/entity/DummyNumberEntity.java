@@ -24,8 +24,9 @@ import java.util.*;
 
 
 public class DummyNumberEntity extends Entity {
-
+    public static final List<Float> POSITIONS = new ArrayList<>(Arrays.asList(0f, -0.25f, 0.12f, -0.12f, 0.25f));
     protected static final int MAXAGE = 35;
+
     public int age;
     public float number = 69420;
     protected float speed = 1;
@@ -39,7 +40,7 @@ public class DummyNumberEntity extends Entity {
     public float prevFadeout = -1;
     private int type = -1; //used for location in array
     protected final Random rand = new Random();
-    public List<Float> list = new ArrayList<>(Arrays.asList(0f, -0.25f, 0.12f, -0.12f, 0.25f));
+
     private final Collection<UUID> targetPlayers = new HashSet<>();
 
     public DummyNumberEntity(EntityType<DummyNumberEntity> type, Level world) {
@@ -57,10 +58,10 @@ public class DummyNumberEntity extends Entity {
 
     public void setAnimation(int i) {
         if (i != -1) {
-            this.speedx = list.get(i % list.size());
+            this.speedx = POSITIONS.get(i % POSITIONS.size());
         } else {
             //this.speedx = (this.rand.nextFloat() - 0.5f) / 2f;
-            this.speedx = list.get(this.rand.nextInt(list.size()));
+            this.speedx = POSITIONS.get(this.rand.nextInt(POSITIONS.size()));
         }
     }
 
