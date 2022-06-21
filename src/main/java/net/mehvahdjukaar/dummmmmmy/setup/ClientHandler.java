@@ -55,7 +55,7 @@ public class ClientHandler implements ClientModInitializer {
     public static void registerClientReceivers() {
         ClientPlayNetworking.registerGlobalReceiver(NetworkHandler.DAMAGE_PACKET_ID, ClientHandler::packetDamageHandler);
         ClientPlayNetworking.registerGlobalReceiver(NetworkHandler.EQUIP_PACKET_ID, ClientHandler::packetSyncEquipHandler);
-        ClientPlayNetworking.registerReceiver(DummyNumberEntity.SPAWN_NUMBER_PACKET_ID, ClientHandler::packetSpawnDummy);
+        ClientPlayNetworking.registerGlobalReceiver(NetworkHandler.SPAWN_NUMBER_PACKET_ID, ClientHandler::packetSpawnDummy);
     }
 
     private static void packetSpawnDummy(Minecraft client, ClientPacketListener clientPacketListener, FriendlyByteBuf packet, PacketSender packetSender) {

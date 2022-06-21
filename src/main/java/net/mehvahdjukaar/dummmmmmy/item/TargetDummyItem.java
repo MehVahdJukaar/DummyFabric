@@ -32,10 +32,10 @@ public class TargetDummyItem extends Item {
 			return InteractionResult.FAIL;
 		} else {
 			Level world = context.getLevel();
-			BlockPlaceContext blockitemusecontext = new BlockPlaceContext(context);
-			BlockPos blockpos = blockitemusecontext.getClickedPos();
+			BlockPlaceContext context1 = new BlockPlaceContext(context);
+			BlockPos blockpos = context1.getClickedPos();
 			BlockPos blockpos1 = blockpos.above();
-			if (blockitemusecontext.canPlace() && world.getBlockState(blockpos1).canBeReplaced(blockitemusecontext)) {
+			if (context1.canPlace() && world.getBlockState(blockpos1).canBeReplaced(context1)) {
 				double d0 = blockpos.getX();
 				double d1 = blockpos.getY();
 				double d2 = blockpos.getZ();

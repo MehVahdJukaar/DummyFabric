@@ -10,6 +10,7 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -97,7 +98,8 @@ public class TargetDummyEntity extends Mob {
         tag.putInt("Type", this.mobType.ordinal());
         tag.putInt("NumberPos", this.damageNumberPos);
         tag.putBoolean("Sheared", this.isSheared());
-        //this.applyEquipmentModifiers();
+
+
     }
 
     @Override
@@ -264,27 +266,33 @@ public class TargetDummyEntity extends Mob {
         //living entity code here. apparently every entity does this check every tick.
         //trying instead to run it only when needed instead
         if (!this.level.isClientSide) {
-            for (EquipmentSlot equipmentslottype : EquipmentSlot.values()) {
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
                 ItemStack itemstack;
-                if (equipmentslottype.getType() == EquipmentSlot.Type.ARMOR) {
-                    itemstack = this.lastArmorItems.get(equipmentslottype.getIndex());
+                if (slot.getType() == EquipmentSlot.Type.ARMOR) {
+                    itemstack = this.lastArmorItems.get(slot.getIndex());
 
-                    ItemStack itemstack1 = this.getItemBySlot(equipmentslottype);
-                    if (!ItemStack.matches(itemstack1, itemstack)) {
-                        if (!itemstack1.equals(itemstack))
+                    ItemStack item = this.getItemBySlot(slot);
+                    if (!ItemStack.matches(item, itemstack)) {
+                        if (!item.equals(itemstack))
                             //send packet
-                            NetworkHandler.sendPacketSyncEquip(this, equipmentslottype.getIndex(), itemstack);
+                        //    NetworkHandler.sendPacketSyncEquip(this, slot.getIndex(), itemstack);
 
                         if (!itemstack.isEmpty()) {
-                            this.getAttributes().removeAttributeModifiers(itemstack.getAttributeModifiers(equipmentslottype));
+                            this.getAttributes().removeAttributeModifiers(itemstack.getAttributeModifiers(slot));
                         }
-                        if (!itemstack1.isEmpty()) {
-                            this.getAttributes().addTransientAttributeModifiers(itemstack1.getAttributeModifiers(equipmentslottype));
+                        if (!item.isEmpty()) {
+                            this.getAttributes().addTransientAttributeModifiers(item.getAttributeModifiers(slot));
                         }
                     }
                 }
             }
         }
+    }
+
+    @Override
+    public void setItemSlot(EquipmentSlot equipmentSlot, ItemStack itemStack) {
+        super.setItemSlot(equipmentSlot, itemStack);
+
     }
 
     @Override
@@ -406,7 +414,7 @@ public class TargetDummyEntity extends Mob {
 
     @Override
     public void tick() {
-
+        this.applyEquipmentModifiers();
         if (this.firstTick && this.level.isClientSide) {
             this.setYBodyRot(0);
             this.setYHeadRot(0);

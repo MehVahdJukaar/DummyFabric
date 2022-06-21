@@ -4,6 +4,7 @@ package net.mehvahdjukaar.dummmmmmy.entity;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.mehvahdjukaar.dummmmmmy.DummmmmmyMod;
+import net.mehvahdjukaar.dummmmmmy.common.NetworkHandler;
 import net.mehvahdjukaar.dummmmmmy.setup.ModRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -72,8 +73,6 @@ public class DummyNumberEntity extends Entity {
                 .add(Attributes.MAX_HEALTH, 20D);
     }
 
-    public static final ResourceLocation SPAWN_NUMBER_PACKET_ID = new ResourceLocation(DummmmmmyMod.MOD_ID, "packet_spawn_number");
-
     @Override
     public Packet<?> getAddEntityPacket() {
         FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
@@ -86,7 +85,7 @@ public class DummyNumberEntity extends Entity {
         packet.writeInt(this.type);
         packet.writeInt(this.targetPlayers.size());
         this.targetPlayers.forEach(packet::writeUUID);
-        return ServerPlayNetworking.createS2CPacket(SPAWN_NUMBER_PACKET_ID, packet);
+        return ServerPlayNetworking.createS2CPacket(NetworkHandler.SPAWN_NUMBER_PACKET_ID, packet);
     }
 
     @Override

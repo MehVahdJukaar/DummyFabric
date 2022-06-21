@@ -16,6 +16,7 @@ public class NetworkHandler {
 
     public static final ResourceLocation DAMAGE_PACKET_ID = new ResourceLocation(DummmmmmyMod.MOD_ID, "packet_damage");
     public static final ResourceLocation EQUIP_PACKET_ID = new ResourceLocation(DummmmmmyMod.MOD_ID, "packet_sync_equip");
+    public static final ResourceLocation SPAWN_NUMBER_PACKET_ID = new ResourceLocation(DummmmmmyMod.MOD_ID, "packet_spawn_number");
 
     public static void registerServerReceivers() {
         //ServerPlayNetworking.registerGlobalReceiver(DAMAGE_PACKET_ID, NetworkHandler::packetDamageHandler);
